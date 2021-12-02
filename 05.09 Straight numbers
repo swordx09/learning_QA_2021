@@ -1,0 +1,23 @@
+// Functions and Methods
+//
+// #9  Straight numbers
+//
+// 
+// 
+// 
+
+public class Numbers {
+   
+    public static void println(int n){
+        if (n < 1) return;
+        for (int i = 1 ; i <= n; i++)
+            System.out.print(i + " ");
+        System.out.println();    
+    }
+    
+    public static void main(String []args){
+       
+        for (int i = 0; i < 10 ; i ++)
+            println(10);
+     }
+}
