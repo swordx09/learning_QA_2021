@@ -1,0 +1,24 @@
+// Functions and Methods
+//
+// #8  Straight stars 
+//
+// 
+// 
+// 
+
+public class Stars {
+   
+    public static void print(int n){
+        if (n < 1) return;
+        for (int i = 0 ; i < n; i++)
+            System.out.print("*");
+    }
+    
+    public static void main(String []args){
+       
+        print(10);
+        System.out.println();
+        print(24);
+
+     }
+}
