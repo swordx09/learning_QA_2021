@@ -1,0 +1,23 @@
+// Functions and Methods
+//
+// #4  Fibonacci:
+//
+// Return k'th member of the Fibonacci sequence
+// Return first n members of the Fibonacci sequence
+// 
+
+public class FibonacciSequence {
+   
+    public static void main(String []args){
+
+        int k = 10;
+        
+        for (int i = 1 ; i <= 9 ; i++)
+        {
+            System.out.println();
+        }
+        
+        System.out.println();
+        
+     }
+}
