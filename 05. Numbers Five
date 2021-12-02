@@ -1,0 +1,54 @@
+// Functions and Methods
+//
+// #1  Print the numbers like this:
+//
+// 5 5 5 5 5 5
+// 5 5 5 5 5 5
+// 5 5 5 5 5 5
+// 5 5 5 5 5 5
+//
+// #2  Print the numbers like this:
+//
+// 5
+// 5 5
+// 5 5 5
+// 5 5 5 5
+// 5 5 5 5 5
+
+
+
+public class NumbersFive{
+    
+    public static String Num2Str (int Num, int Count){
+    // Returns string from Num's space-separated Count times
+    
+        String Res = "";
+        
+        for (int i = 0 ; i < Count-1 ; i++)
+        {
+            Res = Res + Num + " ";
+        }
+        
+        Res = Res + Num;
+        
+        return Res;
+
+    }
+
+     public static void main(String []args){
+
+        for (int i = 0 ; i < 4 ; i++)
+        {
+            System.out.println(Num2Str(5, 6));
+        }
+        
+        System.out.println();
+        
+        for (int i = 1 ; i <= 5 ; i++)
+        {
+            System.out.println(Num2Str(5, i));
+        }
+        System.out.println();
+   
+     }
+}
