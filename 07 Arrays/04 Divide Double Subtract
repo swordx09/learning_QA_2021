@@ -1,0 +1,74 @@
+// Arrays
+//
+// #4 Divide each array element by first array element
+//    Double each array element
+//    Subtract A from each array element
+//    
+// 
+import java.util.Random;
+
+public class Array4 {
+   
+    public static double[] divByFirstArrayElements (double[] array)
+    {
+
+        for (int i = array.length-1 ; i >= 0 ; i--)
+            array[i] = array[i] / array[0];
+        
+        return array;
+    }
+    
+    
+    public static double[] doubleArrayElements (double[] array)
+    {
+
+        for (int i = 0 ; i < array.length; i++)
+            array[i] = array[i] * 2;
+        
+        return array;
+    }
+    
+    
+    public static double[] subtractArrayElements (double[] array, double a)
+    {
+
+        for (int i = 0 ; i < array.length; i++)
+            array[i] = array[i] - a;
+        
+        return array;
+    }
+    
+    
+    public static void main(String []args){
+    
+        double[] array = {2, 3, 7, 20, 200, -11, 0, 49};
+        
+        Random rnd = new Random ();
+        
+        for (int i = 0; i < array.length ; i++)
+            System.out.print( array[i] + " ");
+        System.out.println();
+        
+        array = divByFirstArrayElements(array);
+        
+        for (int i = 0; i < array.length ; i++)
+            System.out.print( array[i] + " ");
+        System.out.println();    
+        
+        array = doubleArrayElements(array);
+        
+        for (int i = 0; i < array.length ; i++)
+            System.out.print( array[i] + " ");
+        System.out.println();
+        
+        double r = rnd.nextInt(100);
+        System.out.println(r);
+        
+        array = subtractArrayElements(array, r);
+        
+        for (int i = 0; i < array.length ; i++)
+            System.out.print( array[i] + " ");
+        System.out.println();
+        
+     }
+}
