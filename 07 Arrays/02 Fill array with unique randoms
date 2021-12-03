@@ -1,0 +1,42 @@
+// Arrays
+//
+// #2 Fill array with random unique numbers
+//
+// 
+// 
+// 
+import java.util.Random;
+
+public class Array2 {
+   
+    public static void main(String []args){
+       
+       int[] array  = new int[20];
+       Random rand = new Random();
+       int  r;
+       boolean isUnique;
+       
+       for (int i = 0; i < array.length; i++)
+       {
+            
+            do 
+            {
+                isUnique = true;
+                r = rand.nextInt(array.length); // or another number bigger that array length
+                for (int j = 0; j < i; j++)
+                    if (array[j] == r)
+                    {
+                        isUnique =  false;
+                        break;
+                    }    
+            }
+            while (!isUnique);
+            
+            array[i] = r;
+       }
+       for (int i = 0; i < array.length; i++)
+            System.out.printf("%d ", array[i]);
+    
+    
+     }
+}
