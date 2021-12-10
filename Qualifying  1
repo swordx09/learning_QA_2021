@@ -76,7 +76,7 @@ WHERE TEMP.avg = (SELECT MAX((ROUND(AVG(P.value),2))) OVER() AS avg
 --------------------------------------------------------------------------------
 -- #4
 -- Найти все товары производителей из Москвы. Вывести имена товаров, их цены и имена производителей
-SELECT G.name, P.value, M.name
+SELECT G.name AS goods_name, P.value AS price, M.name AS manufacturer
 FROM Manufacturer M INNER JOIN Suppliers S ON M.id=S.manufacturer_id
 INNER JOIN Goods G ON S.id=G.supplier_id
 LEFT JOIN Prices P on G.id=P.goods_id
