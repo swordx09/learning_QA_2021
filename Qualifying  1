@@ -1,0 +1,66 @@
+-- Промежуточная аттестация 1
+-- Вихляев Семён
+-- swordx@yandex.ru	+79082260100
+--
+
+--------------------------------------------------------------------------------
+-- #1
+-- Найти самый дорогой товар. Вывести имя товара и его цену
+
+-- Итоговый запрос
+SELECT G.name AS GoodName, P.value AS Price
+FROM Goods G
+INNER JOIN Prices P ON P.goods_id=G.id
+WHERE P.value=(SELECT MAX(Prices.value) FROM Prices)
+
+--------------------------------------------------------------------------------
+-- #2
+-- Найти товары с нулевым остатком. Вывести имя товара и его цену
+
+-- Итоговый запрос
+SELECT G.name, P.value AS price
+FROM Goods G
+LEFT JOIN Quantity Q ON Q.goods_id=G.id
+LEFT JOIN Prices P ON P.goods_id=G.id
+WHERE (Q.value = 0) OR Q.value IS NULL
+
+-- Результат запроса 
+-- Выводятся все товары с нулевым количеством, в том числе без цены и/или без указанного количества.
+-- ТЗ недостаточно полно определяет понятие "нулевой остаток", но излишняя "выдача" подскажет ответственным лицам
+-- либо уточнить ТЗ, либо привести в порядок базу.
+--	1	"Goods_5"	4950
+--	2	"Goods_14"	13720
+--	3	"Goods_15"	14850
+--	4	"Goods_21"	19800
+--	5	"Goods_18"	<null>
+
+--------------------------------------------------------------------------------
+-- #3
+-- Найти производителя с самой большой средней ценой за товары. Вывести имя производителя и среднюю стоимость
+
+-- Итоговый запрос
+SELECT TEMP.manufacturer_name AS manufacturer, TEMP.avg AS average_price
+FROM (SELECT M.id AS man_id, M.name AS manufacturer_name, (ROUND(AVG(P.value),2)) AS avg
+		FROM Manufacturer M
+		INNER JOIN Suppliers S ON S.manufacturer_id = M.id
+		INNER JOIN Goods G ON G.supplier_id = S.id
+		INNER JOIN Prices P ON P.goods_id = G.id AND P.value <> 0
+	 	GROUP BY M.id) AS TEMP
+WHERE TEMP.avg = (SELECT MAX(TEMP1.avg)
+				  FROM (SELECT (ROUND(AVG(P.value),2)) AS avg
+						FROM Manufacturer M
+						INNER JOIN Suppliers S ON S.manufacturer_id = M.id
+						INNER JOIN Goods G ON G.supplier_id = S.id
+						INNER JOIN Prices P ON P.goods_id = G.id AND P.value <> 0
+	 					GROUP BY M.name) AS TEMP1)
+
+--------------------------------------------------------------------------------
+-- #4
+-- Найти все товары производителей из Москвы. Вывести имена товаров, их цены и имена производителей
+SELECT G.name, P.value, M.name
+FROM Manufacturer M INNER JOIN Suppliers S ON M.id=S.manufacturer_id
+INNER JOIN Goods G ON S.id=G.supplier_id
+LEFT JOIN Prices P on G.id=P.goods_id
+WHERE M.location = 'Moscow'
+
+-- как и в задании 2 выводятся товары включая те, для которых не установлена цена
