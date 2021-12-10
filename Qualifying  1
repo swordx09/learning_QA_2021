@@ -53,6 +53,25 @@ WHERE TEMP.avg = (SELECT MAX(TEMP1.avg)
 						INNER JOIN Goods G ON G.supplier_id = S.id
 						INNER JOIN Prices P ON P.goods_id = G.id AND P.value <> 0
 	 					GROUP BY M.name) AS TEMP1)
+						
+-- Запрос 3.1
+SELECT TEMP.manufacturer_name AS manufacturer, TEMP.avg AS average_price
+FROM (SELECT M.id AS man_id, M.name AS manufacturer_name, (ROUND(AVG(P.value),2)) AS avg
+		FROM Manufacturer M
+		INNER JOIN Suppliers S ON S.manufacturer_id = M.id
+		INNER JOIN Goods G ON G.supplier_id = S.id
+		INNER JOIN Prices P ON P.goods_id = G.id AND P.value <> 0
+	 	GROUP BY M.id) AS TEMP
+WHERE TEMP.avg = (SELECT MAX((ROUND(AVG(P.value),2))) OVER() AS avg
+						FROM Manufacturer M
+						INNER JOIN Suppliers S ON S.manufacturer_id = M.id
+						INNER JOIN Goods G ON G.supplier_id = S.id
+						INNER JOIN Prices P ON P.goods_id = G.id AND P.value <> 0
+	 					GROUP BY M.name
+				 		LIMIT 1
+				 ) 
+
+						
 
 --------------------------------------------------------------------------------
 -- #4
